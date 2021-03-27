@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/fly_dead.png" type="Texture" id=1]
+[ext_resource path="res://Assets/fly.png" type="Texture" id=2]
+[ext_resource path="res://Enemy/Enemy3.gd" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=32]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=33]
+extents = Vector2( 20.0118, 13.1968 )
+
+[node name="Enemy3" type="KinematicBody2D"]
+position = Vector2( 2009.46, 65.3164 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 32 )
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( -0.13047, 0.597168 )
+shape = SubResource( 33 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+polygon = PoolVector2Array( -20, -36.2, -20, -33.5, -10.9, -18, -2.8, -18, 4.5, -16.4, 17.9, -39, 19.2, -39, 23.2, -43, 33, -43, 33, -41.1, 52, -30.2, 52, -26.5, 58.2, -14, 55.1, -14, 51.2, -7, 48.7, -7, 42, -2, 55, 18.4, 55, 23.7, 51, 29, 48.6, 29, 28.6, 42, 21.2, 42, 16.3, 37.1, -1.6, 44, -13.4, 44, -16.9, 42.6, -28, 48.2, -28, 44.9, -41, 32.9, -41, 27, -36, 23, -36, 2.9, -56, -20.3, -56, -28.1, -35, -41.1, -35, -44.4 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

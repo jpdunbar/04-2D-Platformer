@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Enemy/Enemy1.gd" type="Script" id=1]
+[ext_resource path="res://Assets/bee.png" type="Texture" id=2]
+[ext_resource path="res://Assets/bee_move.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 15.4082, 11.9427 )
+
+[node name="Enemy1" type="KinematicBody2D"]
+position = Vector2( 700, 511 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 2 )
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.280609, 0.561207 )
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+polygon = PoolVector2Array( 37, -44.7, 37, -42.9, 53, -27.9, 53, -21.4, 55.5, -10, 52.8, -10, 46.8, -4, 43.4, -4, 31.4, 0.300003, 38, 12.5, 38, 34, 36.1, 34, 28.1, 47, 25.5, 47, 19.5, 50, 11.5, 50, -3, 42.2, -3, 39, -6.3, 27.5, -16.5, 33, -25.4, 33, -28.8, 31.6, -33.2, 36, -36.6, 36, -49, 28.1, -49, 22.5, -46.8, 18.1, -50.4, 0, -48.3, 0, -43.6, -10.9, -54, -23.3, -54, -26, -55.6, -32, -52.7, -32, -36.7, -44, -34.3, -44, -25, -45.3, -25, -42.9, -19, -37.9, -19, -35.5, -11.9, -23, -5.8, -23, 1.6, -21.4, 27, -43.9, 27, -46.4 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Enemy/Enemy2.gd" type="Script" id=1]
+[ext_resource path="res://Assets/slimeBlue.png" type="Texture" id=2]
+[ext_resource path="res://Assets/slimeBlue_move.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 28.3749
+
+[node name="Enemy2" type="KinematicBody2D"]
+position = Vector2( 1022, 480 )
+collision_layer = 2147483648
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+constraint_left = Vector2( 1022, 480 )
+constraint_right = Vector2( 1245, 480 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 2 )
+speed_scale = 0.5
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( 11, -0.400002, 28, 5.6, 28, 7.3, 45, 26.2, 45, 29.5, 48, 35.5, 48, 55, 46.1, 55, 40.4, 64, -39, 64, -48, 51.7, -48, 35.7, -44.4, 25, -43, 25, -27, 5, -24.4, 5, -11, -0.400002, -11, -2, 11, -2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0.374573, 19.8525 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
